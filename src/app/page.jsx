@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
@@ -9,7 +10,9 @@ export default function Home() {
   const [menuOuvert, setMenuOuvert] = useState(false)
 
   return (
-    <main className="w-full max-w-[1200px] min-h-screen mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-center overflow-hidden">
+
+    <main className="w-full max-w-[1200px] min-h-screen mx-auto px-4 md:px-6 lg:px-8 flex items-center justify-center overflow-hidden min-h-screen bg-black">
+
       {!menuOuvert ? (
         <div className="flex flex-col items-center justify-center gap-4 max-h-[80vh]">
           <img
