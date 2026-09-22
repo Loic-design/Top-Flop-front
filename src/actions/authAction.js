@@ -1,6 +1,5 @@
 "use server";
 
-import { redirect } from "next/navigation";
 
 export async function handleSubmit(formData) {
   // contient les données saisies par le formulaire
@@ -26,11 +25,14 @@ export async function handleSubmit(formData) {
 
   //erreur
   if (!res.ok) {
+    const errorData = await res.json()
     return {
-      error: "Une erreur est apparue",
+      error: errorData.error
     };
   }
 
-  redirect("/create-salon");
+  return {
+    sucess: "Compte créé avec succès"
+  }
   //   const result = await res.json();
 }
