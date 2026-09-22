@@ -1,3 +1,5 @@
+import { handleSubmit } from "@/actions/authAction.js"
+
 export default function Authentification() {
     return (
         <main className="min-h-screen bg-zinc-950 px-5 py-10 text-white">
@@ -10,7 +12,7 @@ export default function Authentification() {
                     Mon compte
                 </h2>
 
-                <form className="flex flex-col gap-5 rounded-2xl bg-white p-6 text-zinc-900 shadow-xl">
+                <form action={handleSubmit} className="flex flex-col gap-5 rounded-2xl bg-white p-6 text-zinc-900 shadow-xl">
                     <div className="flex flex-col gap-2">
                         <label
                             htmlFor="login-email"
