@@ -1,6 +1,14 @@
-import { handleSubmit } from "@/actions/authAction.js"
+"use client"
+
+import { useActionState } from "react";
+import { handleLogin, handleSubmit } from "@/actions/authAction.js"
 
 export default function Authentification() {
+
+    const [registerState,registerFormAction] = useActionState(handleSubmit, null);
+    const [loginState,loginFormAction] = useActionState(handleLogin, null);
+
+
     return (
         <main className="min-h-screen bg-zinc-950 px-5 py-10 text-white">
             <h1 className="mb-8 text-center text-3xl font-bold">
@@ -12,7 +20,7 @@ export default function Authentification() {
                     Mon compte
                 </h2>
 
-                <form action={handleSubmit} className="flex flex-col gap-5 rounded-2xl bg-white p-6 text-zinc-900 shadow-xl">
+                <form action={loginFormAction} className="flex flex-col gap-5 rounded-2xl bg-white p-6 text-zinc-900 shadow-xl">
                     <div className="flex flex-col gap-2">
                         <label
                             htmlFor="login-email"
@@ -51,6 +59,18 @@ export default function Authentification() {
                     >
                         Se connecter
                     </button>
+                    
+                    {/* message erreur ?. empêche de planter. On vérifie puis on affiche*/}
+                    {loginState?.error && (
+                        <p className="rounded-lg bg-red-100 px-4 py-2 text-sm font-semibold text-red-700">
+                        {loginState.error}
+                        </p>
+                    )}
+                    {loginState?.success && (
+                        <p className="rounded-lg bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+                        {loginState.success}
+                    </p>
+                    )}                    
                 </form>
 
                 <div className="my-8 flex items-center gap-4 text-sm font-semibold text-zinc-500">
@@ -65,7 +85,7 @@ export default function Authentification() {
                     Nouveau compte
                 </h2>
 
-                <form className="flex flex-col gap-5 rounded-2xl bg-white p-6 text-zinc-900 shadow-xl">
+                <form action={registerFormAction} className="flex flex-col gap-5 rounded-2xl bg-white p-6 text-zinc-900 shadow-xl">
                     <div className="flex flex-col gap-2">
                         <label
                             htmlFor="input-name"
@@ -117,9 +137,23 @@ export default function Authentification() {
                     <button
                         type="submit"
                         className="mt-2 w-full rounded-xl bg-zinc-950 px-4 py-3 font-bold text-white transition hover:bg-zinc-800 active:scale-[0.98]"
-                    >
+                    > 
                         Créer un compte
                     </button>
+
+                    {/* message erreur ?. empêche de planter. On vérifie puis on affiche*/}
+                    {registerState?.error && (
+                        <p className="rounded-lg bg-red-100 px-4 py-2 text-sm font-semibold text-red-700">
+                            {registerState.error}
+                        </p>
+                    )}
+
+                    {registerState?.success && (
+                        <p className="rounded-lg bg-green-100 px-4 py-2 text-sm font-semibold text-green-700">
+                            {registerState.success}
+                        </p>
+                    )}
+
                 </form>
             </section>
         </main>
